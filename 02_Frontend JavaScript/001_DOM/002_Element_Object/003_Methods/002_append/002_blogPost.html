@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comment Section</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+      }
+
+      #comments-section {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      #comments-section h3 {
+        margin-top: 0;
+        font-size: 1.5em;
+      }
+
+      #comments-section p {
+        padding: 10px;
+        background-color: #e9e9e9;
+        border-radius: 5px;
+        margin: 10px 0;
+      }
+
+      #comment-input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      #submit-comment {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #submit-comment:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="comments-section">
+      <h3>Comments</h3>
+    </div>
+
+    <textarea id="comment-input" placeholder="Write a comment..."></textarea>
+    <button id="submit-comment">Submit</button>
+
+    <script>
+      // Function to add a comment
+      function addComment() {
+        // Get the comment text from the input box
+        const commentText = document.getElementById("comment-input").value;
+
+        if (commentText.trim() === "") {
+          alert("Please enter a comment");
+          return;
+        }
+
+        // Create a new paragraph element to hold the comment
+        const newComment = document.createElement("p");
+        newComment.textContent = commentText;
+
+        // Get the comments section where the new comment will be added
+        const commentsSection = document.getElementById("comments-section");
+
+        // Append the new comment to the comments section
+        commentsSection.append(newComment);
+
+        // Clear the input box for the next comment
+        document.getElementById("comment-input").value = "";
+      }
+
+      // Attach event listener to the submit button
+      document
+        .getElementById("submit-comment")
+        .addEventListener("click", addComment);
+    </script>
+  </body>
+</html>

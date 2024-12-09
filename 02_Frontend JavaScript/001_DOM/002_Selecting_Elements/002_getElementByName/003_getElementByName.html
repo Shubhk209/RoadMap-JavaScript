@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Element by Name Example</title>
+    <style>
+      input {
+        display: block;
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" name="username" placeholder="Username" />
+    <input type="password" name="password" placeholder="Password" />
+
+    <!-- Vanilla JavaScript -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Select elements by name attribute
+        var usernameInputs = document.getElementsByName("username");
+        var passwordInputs = document.getElementsByName("password");
+
+        // Change the value of the inputs
+        if (usernameInputs.length > 0) {
+          usernameInputs[0].value = "DefaultUsername";
+        }
+        if (passwordInputs.length > 0) {
+          passwordInputs[0].value = "DefaultPassword";
+        }
+
+        // Add an event listener to change value on click
+        if (usernameInputs.length > 0) {
+          usernameInputs[0].addEventListener("click", function () {
+            this.value = "Username Clicked!";
+          });
+        }
+        if (passwordInputs.length > 0) {
+          passwordInputs[0].addEventListener("click", function () {
+            this.value = "Password Clicked!";
+            this.setAttribute("type", "text");
+          });
+        }
+      });
+    </script>
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery Code -->
+    <script>
+      $(document).ready(function () {
+        // Select elements by name attribute
+        var $usernameInputs = $('input[name="username"]');
+        var $passwordInputs = $('input[name="password"]');
+
+        // Change the value of the inputs
+        if ($usernameInputs.length > 0) {
+          $usernameInputs.val("DefaultUsername");
+        }
+        if ($passwordInputs.length > 0) {
+          $passwordInputs.val("DefaultPassword");
+        }
+
+        // Add an event listener to change value on click
+        if ($usernameInputs.length > 0) {
+          $usernameInputs.on("click", function () {
+            $(this).val("Username Clicked!");
+          });
+        }
+        if ($passwordInputs.length > 0) {
+          $passwordInputs.on("click", function () {
+            $(this).val("Password Clicked!");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

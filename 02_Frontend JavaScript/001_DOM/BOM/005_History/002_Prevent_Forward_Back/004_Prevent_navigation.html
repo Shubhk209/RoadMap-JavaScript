@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prevent Back and Forward Navigation</title>
+  </head>
+  <body>
+    <div id="content">You cannot navigate back or forward from this page.</div>
+    <script>
+      // Function to prevent back and forward navigation
+      function preventNavigation() {
+        // Push the current state onto the history stack
+        history.pushState(null, null, location.href);
+        // Listen for the popstate event
+        window.addEventListener("popstate", () => {
+          // Push the state again when the user tries to navigate back or forward
+          history.pushState(null, null, location.href);
+        });
+      }
+
+      // Prevent navigation when the page loads
+      window.addEventListener("load", preventNavigation);
+    </script>
+  </body>
+</html>

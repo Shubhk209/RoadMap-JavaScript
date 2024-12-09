@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toggle Container</title>
+    <style>
+      /* Styles for the body */
+      body {
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+
+      /* Styles for the instructions */
+      .instructions {
+        margin-bottom: 20px; /* Add space below */
+        font-size: 18px;
+        color: #333;
+      }
+
+      /* Styles for the container */
+      .container {
+        width: 200px;
+        height: 200px;
+        background-color: lightblue;
+        transition: all 0.3s ease; /* Smooth transition for size change */
+      }
+
+      /* Styles for the expanded state of the container */
+      .container.expanded {
+        width: 400px; /* Double the width */
+        height: 400px; /* Double the height */
+        background-color: lightcoral; /* Different background color */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Text instructions for the user -->
+    <div class="instructions">Double click the box to expand and de-expand</div>
+    <!-- Container element to be toggled -->
+    <div class="container" id="toggleContainer"></div>
+    <!-- JavaScript to handle double click event -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get reference to the container element
+        const container = document.getElementById("toggleContainer");
+
+        // Add event listener for double click
+        container.addEventListener("dblclick", function () {
+          // Toggle the 'expanded' class to expand or contract the container
+          container.classList.toggle("expanded");
+        });
+      });
+    </script>
+  </body>
+</html>

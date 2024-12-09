@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      main {
+        width: 100%;
+        height: 100%;
+      }
+      /* Basic styling for the nav bar */
+      nav {
+        background-color: #333;
+        padding: 10px;
+      }
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+      nav ul li {
+        margin-right: 20px;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <ul id="navbar">
+          <!-- Navigation items will be generated here -->
+        </ul>
+      </nav>
+    </main>
+
+    <script>
+      // Array of navigation items with names and URLs
+      const navItems = [
+        { name: "Home", url: "index.html" },
+        { name: "About", url: "about.html" },
+        { name: "Services", url: "services.html" },
+        { name: "Contact", url: "contact.html" },
+        { name: "Blog", url: "blog.html" },
+      ];
+
+      // Function to create the navigation bar
+      function createNavBar(navItems) {
+        // Get the parent element
+        const navbar = document.getElementById("navbar");
+
+        navItems.forEach((item) => {
+          // Create a list item
+          const li = document.createElement("li");
+
+          // Create an anchor tag
+          const a = document.createElement("a");
+          a.textContent = item.name;
+          a.href = item.url;
+
+          // Append the anchor to the list item
+          li.appendChild(a);
+
+          // Append the list item to the navbar
+          navbar.appendChild(li);
+        });
+      }
+
+      // Call the function to create the navbar
+      createNavBar(navItems);
+    </script>
+  </body>
+</html>

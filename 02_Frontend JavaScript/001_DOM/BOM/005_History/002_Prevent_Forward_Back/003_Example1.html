@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prevent Navigation with history.pushState</title>
+  </head>
+  <body>
+    <h1>Form with Unsaved Changes</h1>
+    <form id="myForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" />
+      <br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("myForm");
+        let isFormDirty = false;
+
+        // Detect changes in the form and set the dirty flag
+        form.addEventListener("input", function () {
+          isFormDirty = true;
+        });
+
+        // Listen for the beforeunload event to show a confirmation dialog
+        window.addEventListener("beforeunload", function (e) {
+          if (isFormDirty) {
+            const confirmationMessage =
+              "You have unsaved changes. Are you sure you want to leave?";
+            (e || window.event).returnValue = confirmationMessage; // For most browsers
+            return confirmationMessage; // For some older browsers
+          }
+        });
+
+        // Handle browser back/forward navigation with the popstate event
+        window.addEventListener("popstate", function (e) {
+          if (isFormDirty) {
+            const confirmationMessage =
+              "You have unsaved changes. Are you sure you want to leave?";
+            if (!confirm(confirmationMessage)) {
+              // If user cancels, push the state back to prevent navigation
+              history.pushState(null, null, document.URL);
+            }
+          }
+        });
+
+        // Initially push the current state to the history stack
+        history.pushState(null, null, document.URL);
+      });
+    </script>
+  </body>
+</html>

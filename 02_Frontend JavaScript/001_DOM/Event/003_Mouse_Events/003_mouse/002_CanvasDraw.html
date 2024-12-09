@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Event Canvas</title>
+    <style>
+      /* Style for the canvas element */
+      #canvas {
+        border: 1px solid black; /* Adds a border to the canvas */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Canvas element where drawing will happen -->
+    <canvas id="canvas" width="500" height="300"></canvas>
+    <script>
+      // Get the canvas element and its 2D drawing context
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Variables to track the drawing state and cursor position
+      let isDrawing = false;
+      let x = 0;
+      let y = 0;
+
+      // Mouse Down Event - Starts drawing
+      canvas.addEventListener("mousedown", (e) => {
+        isDrawing = true; // Set drawing state to true
+        x = e.offsetX; // Set the initial cursor X position
+        y = e.offsetY; // Set the initial cursor Y position
+      });
+
+      // Mouse Up Event - Stops drawing
+      canvas.addEventListener("mouseup", () => {
+        isDrawing = false; // Set drawing state to false
+      });
+
+      // Mouse Move Event - Draws line while mouse is moving and drawing
+      canvas.addEventListener("mousemove", (e) => {
+        if (isDrawing) {
+          // Only draw if in the drawing state
+          ctx.beginPath(); // Start a new path
+          ctx.moveTo(x, y); // Move to the last cursor position
+          x = e.offsetX; // Update cursor X position
+          y = e.offsetY; // Update cursor Y position
+          ctx.lineTo(x, y); // Draw a line to the new cursor position
+          ctx.stroke(); // Render the line
+        }
+      });
+
+      // Mouse Over Event - Changes cursor to a crosshair when over the canvas
+      canvas.addEventListener("mouseover", () => {
+        canvas.style.cursor = "crosshair"; // Set cursor style to crosshair
+      });
+
+      // Mouse Out Event - Changes cursor back to default when leaving the canvas
+      canvas.addEventListener("mouseout", () => {
+        canvas.style.cursor = "default"; // Set cursor style to default
+      });
+    </script>
+  </body>
+</html>

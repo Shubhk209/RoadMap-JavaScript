@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array Constructor Property Example</title>
+  </head>
+  <body>
+    <h1>Array Constructor Property Example</h1>
+
+    <script>
+      // Function to process an array
+      function processArray(input) {
+        // Check if the input is an array by comparing its constructor property with the Array constructor
+        if (input.constructor !== Array) {
+          // If the input is not an array, throw an error
+          throw new Error("Input must be an array.");
+        }
+
+        // If the input is an array, process each item in the array
+        input.forEach((item) => {
+          console.log(item); // Log each item to the console
+        });
+      }
+
+      // Test the function with valid and invalid inputs
+      try {
+        // Example of valid input (an array)
+        const myArray = [1, 2, 3, 4];
+        processArray(myArray); // This will log: 1, 2, 3, 4
+
+        // Example of invalid input (a string, not an array)
+        const notAnArray = "This is not an array";
+        processArray(notAnArray); // This will throw an error: "Input must be an array."
+      } catch (error) {
+        // If an error occurs, log the error message to the console
+        console.error(error.message);
+      }
+    </script>
+  </body>
+</html>

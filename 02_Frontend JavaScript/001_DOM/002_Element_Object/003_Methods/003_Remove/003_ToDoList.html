@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic To-Do List</title>
+    <style>
+      /* Basic styling for the page */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      /* Styling for the task input field */
+      #taskInput {
+        padding: 10px;
+        width: 300px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      /* Styling for the 'Add Task' button */
+      #addTaskBtn {
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Hover effect for the 'Add Task' button */
+      #addTaskBtn:hover {
+        background-color: #218838;
+      }
+
+      /* Remove default list styling */
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      /* Styling for each task (li element) */
+      li {
+        padding: 10px;
+        margin: 5px 0;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Styling for completed tasks */
+      li.completed {
+        text-decoration: line-through;
+        color: gray;
+      }
+
+      /* Styling for the 'Remove' button */
+      .removeBtn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 5px 10px;
+      }
+
+      /* Hover effect for the 'Remove' button */
+      .removeBtn:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Heading for the to-do list -->
+    <h1>To-Do List</h1>
+
+    <!-- Input field for entering a new task and a button to add the task -->
+    <input type="text" id="taskInput" placeholder="Enter a new task..." />
+    <button id="addTaskBtn">Add Task</button>
+
+    <!-- Unordered list where tasks will be displayed -->
+    <ul id="taskList"></ul>
+
+    <script>
+      // Add event listener to the 'Add Task' button
+      document
+        .getElementById("addTaskBtn")
+        .addEventListener("click", function () {
+          // Get the value entered in the task input field
+          const taskInput = document.getElementById("taskInput");
+          const taskText = taskInput.value.trim();
+
+          // Check if the input is not empty
+          if (taskText !== "") {
+            // Add the task to the list
+            addTask(taskText);
+            // Clear the input field after adding the task
+            taskInput.value = "";
+          }
+        });
+
+      // Function to add a task to the list
+      function addTask(taskText) {
+        const taskList = document.getElementById("taskList"); // Get the task list element
+        const li = document.createElement("li"); // Create a new list item (li)
+
+        // Set the text of the list item to the task text
+        li.textContent = taskText;
+
+        // Create a 'Remove' button for the task
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.className = "removeBtn";
+
+        // Add event listener to the 'Remove' button to delete the task when clicked
+        removeBtn.addEventListener("click", function () {
+          taskList.removeChild(li);
+        });
+
+        // Append the 'Remove' button to the list item
+        li.appendChild(removeBtn);
+
+        // Add event listener to the list item to toggle completion status
+        li.addEventListener("click", function () {
+          li.classList.toggle("completed");
+        });
+
+        // Append the list item to the task list
+        taskList.appendChild(li);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event Bubbling Example</title>
+  </head>
+  <body>
+    <ul id="itemList">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+
+    <script>
+      document.querySelectorAll("#itemList li").forEach((item) => {
+        item.addEventListener("click", function () {
+          alert(this.textContent);
+        });
+      });
+
+      /*
+        We are adding an event listener to each list item individually.
+        + If we dynamically add more items, we would need to add more event listeners.
+      */
+    </script>
+  </body>
+</html>

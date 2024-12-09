@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Move Up and Down Example</title>
+    <style>
+      /* Basic styling for the list and buttons */
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      button {
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Task List</h1>
+    <ul id="taskList">
+      <li>
+        Task 1
+        <span
+          ><button onclick="moveUp(this)">Move Up</button>
+          <button onclick="moveDown(this)">Move Down</button></span
+        >
+      </li>
+      <li>
+        Task 2
+        <span
+          ><button onclick="moveUp(this)">Move Up</button>
+          <button onclick="moveDown(this)">Move Down</button></span
+        >
+      </li>
+      <li>
+        Task 3
+        <span
+          ><button onclick="moveUp(this)">Move Up</button>
+          <button onclick="moveDown(this)">Move Down</button></span
+        >
+      </li>
+      <li>
+        Task 4
+        <span
+          ><button onclick="moveUp(this)">Move Up</button>
+          <button onclick="moveDown(this)">Move Down</button></span
+        >
+      </li>
+    </ul>
+
+    <script>
+      function moveUp(button) {
+        const currentItem = button.parentElement.parentElement;
+        const previousItem = currentItem.previousElementSibling;
+        if (previousItem) {
+          currentItem.parentElement.insertBefore(currentItem, previousItem);
+        }
+      }
+
+      function moveDown(button) {
+        const currentItem = button.parentElement.parentElement;
+        const nextItem = currentItem.nextElementSibling;
+        if (nextItem) {
+          currentItem.parentElement.insertBefore(nextItem, currentItem);
+        }
+      }
+    </script>
+  </body>
+</html>

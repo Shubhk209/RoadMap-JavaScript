@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event Bubbling Example</title>
+  </head>
+  <body>
+    <ul id="itemList">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+
+    <script>
+      document
+        .getElementById("itemList")
+        .addEventListener("click", function (event) {
+          if (event.target && event.target.nodeName === "LI") {
+            alert(event.target.textContent);
+          }
+        });
+
+      /*
+        we attach a single event listener to the parent `ul` element. 
+        + The event bubbles up from the `li` elements to the `ul`, allowing us to handle all click events in one place.
+      */
+    </script>
+  </body>
+</html>

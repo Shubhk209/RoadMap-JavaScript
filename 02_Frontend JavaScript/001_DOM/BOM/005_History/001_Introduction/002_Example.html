@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple SPA with History API</title>
+    <style>
+      /* Hide all pages by default */
+      .page {
+        display: none;
+      }
+      /* Display the active page */
+      .page.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <!-- Navigation buttons for different pages -->
+      <button onclick="navigateTo('/home')">Home</button>
+      <button onclick="navigateTo('/about')">About</button>
+      <button onclick="navigateTo('/contact')">Contact</button>
+      <!-- Buttons for history navigation -->
+      <button onclick="history.back()">Back</button>
+      <button onclick="history.forward()">Forward</button>
+      <button onclick="history.go(-1)">Go Back</button>
+      <button onclick="history.go(1)">Go Forward</button>
+    </nav>
+    <div id="content">
+      <!-- Page content containers -->
+      <div id="home" class="page active">Welcome to the Home page!</div>
+      <div id="about" class="page">About us page</div>
+      <div id="contact" class="page">Contact us page</div>
+    </div>
+    <script>
+      /**
+       * Navigate to a specific URL
+       * @param {string} url - The URL to navigate to
+       */
+      function navigateTo(url) {
+        // Create a state object
+        const state = { url: url };
+        // Get the current document title
+        const title = document.title;
+        // Add a new entry to the browser's history
+        history.pushState(state, title, url);
+        // Update the content based on the new URL
+        updateContent(url);
+      }
+
+      /**
+       * Update the visible content based on the URL
+       * @param {string} url - The URL to update content for
+       */
+      function updateContent(url) {
+        // Get all page elements
+        const pages = document.querySelectorAll(".page");
+        // Remove the active class from all pages
+        pages.forEach((page) => page.classList.remove("active"));
+
+        // Extract the page ID from the URL
+        const pageId = url.substring(1); // Remove the leading '/'
+        // Find the corresponding page element
+        const activePage = document.getElementById(pageId);
+        if (activePage) {
+          // Add the active class to the corresponding page
+          activePage.classList.add("active");
+        } else {
+          // Handle 404 - Page not found
+          alert("Page not found");
+        }
+      }
+
+      // Listen for the popstate event (e.g., when the user navigates using the back/forward buttons)
+      window.addEventListener("popstate", (event) => {
+        if (event.state && event.state.url) {
+          // Update content based on the state URL
+          updateContent(event.state.url);
+        }
+      });
+
+      // Handle the initial load of the page
+      window.addEventListener("load", () => {
+        // Get the initial URL
+        const initialUrl = location.pathname;
+        // Update content based on the initial URL
+        updateContent(initialUrl);
+      });
+
+      // Initial navigation setup to display the home page
+      navigateTo("/home");
+    </script>
+  </body>
+</html>
+
+<!-- 
+Explanation with Comments
+1. HTML Structure:
+
+    + Navigation Buttons: Buttons for navigating to different pages (Home, About, Contact) and for history navigation (Back, Forward, Go Back, Go Forward).
+    + Page Content Containers: div elements for each page, with IDs corresponding to the URLs and a class of page.
+
+2. CSS
+
+    + .page Class: Hides all pages by default.
+    + .page.active Class: Displays the active page.
+
+
+-->
+
+<!-- Javascript -->
+<!-- 
+1. navigateTo(url) Function:
+    + Creates a state object with the URL.
+    + Gets the current document title.
+    + Uses "history.pushState()" to add a new entry to the browser's history.
+    + Calls updateContent(url) to update the visible content.
+2. updateContent(url) Function:
+    + Removes the active class from all pages.
+    + Extracts the page ID from the URL and finds the corresponding div.
+    + Adds the active class to the corresponding page or shows an alert if the page is not found.
+3. popstate Event Listener
+    + Listens for history navigation events (e.g., back/forward buttons).
+    + Updates the content based on the state URL.
+4. Initial Load Handling
+    + Listens for the load event to handle the initial page load.
+    + Updates the content based on the current URL.
+-->
+
+<!-- 
+5. Initial Navigation Setup
+
+Calls navigateTo('/home') to display the home page when the page loads.
+
+-->

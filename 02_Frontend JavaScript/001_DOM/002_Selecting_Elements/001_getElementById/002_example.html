@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Element by ID Example</title>
+    <style>
+      .btn {
+        border: 2px solid green;
+        display: block;
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="myButton" class="btn">Click Me!</button>
+    <button id="myButton2" class="btn">Click Me!</button>
+
+    <!-- Vanilla JavaScript -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Select the element by ID
+        var myButton = document.getElementById("myButton");
+
+        console.log("Element Object of Button 1: ", myButton);
+
+        // Change the text of the button
+        myButton.textContent = "Clicked using Vanilla JS!";
+
+        // Add an event listener to change text on click
+        myButton.addEventListener("click", function () {
+          myButton.textContent = "Button Clicked!";
+        });
+      });
+    </script>
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery Code -->
+    <script>
+      $(document).ready(function () {
+        // Select the element by ID
+        var myButton = $("#myButton2");
+
+        console.log("Element Object of Button 2: ", myButton);
+
+        // Change the text of the button
+        myButton.text("Clicked using jQuery!");
+
+        // Add an event listener to change text on click
+        myButton.on("click", function () {
+          $(this).text("Button Clicked!");
+        });
+      });
+    </script>
+  </body>
+</html>

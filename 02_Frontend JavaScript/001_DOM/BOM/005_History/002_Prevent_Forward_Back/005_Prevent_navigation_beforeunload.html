@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prevent Back and Forward Navigation</title>
+  </head>
+  <body>
+    <div id="content">
+      You cannot navigate back or forward from this page without confirmation.
+    </div>
+    <script>
+      // Function to show a confirmation dialog when the user tries to navigate away
+      window.addEventListener("beforeunload", (event) => {
+        const message = "Are you sure you want to leave this page?";
+        event.returnValue = message; // Standard method for most browsers
+        return message; // For some older browsers
+      });
+    </script>
+  </body>
+</html>

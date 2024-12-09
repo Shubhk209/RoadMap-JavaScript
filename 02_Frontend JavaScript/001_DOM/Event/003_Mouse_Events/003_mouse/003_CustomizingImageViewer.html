@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Image Viewer</title>
+    <style>
+      .image-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .image-container img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .context-menu {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 5px;
+        list-style: none;
+      }
+
+      .context-menu li {
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      .context-menu li:hover {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image-container">
+      <img src="https://placebear.com/g/200/200" alt="Image 1" />
+      <img src="https://placebear.com/g/200/200" alt="Image 2" />
+      <img src="https://placebear.com/g/200/200" alt="Image 3" />
+    </div>
+    <script>
+      const images = document.querySelectorAll(".image-container img");
+
+      images.forEach((image) => {
+        image.addEventListener("contextmenu", (event) => {
+          event.preventDefault(); // Prevent default browser context menu
+
+          // Create a custom context menu element
+          const menu = document.createElement("ul");
+          menu.classList.add("context-menu");
+
+          // Add menu items based on desired actions
+          const saveItem = document.createElement("li");
+          saveItem.textContent = "Save Image";
+          saveItem.addEventListener("click", () => {
+            // Code to download the image (implement download logic here)
+            console.log("Downloading image...");
+          });
+          menu.appendChild(saveItem);
+
+          const copyItem = document.createElement("li");
+          copyItem.textContent = "Copy Image URL";
+          copyItem.addEventListener("click", () => {
+            // Code to copy the image URL to clipboard
+            navigator.clipboard
+              .writeText(image.src)
+              .then(() => console.log("Image URL copied!"))
+              .catch((err) => console.error("Failed to copy image URL:", err));
+          });
+          menu.appendChild(copyItem);
+
+          const openItem = document.createElement("li");
+          openItem.textContent = "Open in New Tab";
+          openItem.addEventListener("click", () => {
+            window.open(image.src, "_blank");
+          });
+          menu.appendChild(openItem);
+
+          // Position the menu based on the click event
+          menu.style.left = `${event.clientX}px`;
+          menu.style.top = `${event.clientY}px`;
+
+          // Append the menu to the body and handle closing
+          document.body.appendChild(menu);
+
+          // Close the menu on click outside
+          document.addEventListener("click", (e) => {
+            if (!menu.contains(e.target)) {
+              document.body.removeChild(menu);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Draggable Sticky Note</title>
+    <style>
+      #sticky-note {
+        width: 200px;
+        height: 150px;
+        background-color: light yellow;
+        border: 1px solid black;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        cursor: move;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sticky-note">Drag me!</div>
+    <script>
+      const stickyNote = document.getElementById("sticky-note");
+      let initialX, initialY;
+
+      // Add mousedown event listener to initiate dragging
+      stickyNote.addEventListener("mousedown", (event) => {
+        // Capture initial mouse position on mousedown
+        initialX = event.clientX;
+        initialY = event.clientY;
+
+        // Start tracking mouse movements during drag
+        stickyNote.addEventListener("mousemove", drag);
+      });
+
+      // Function to handle dragging behavior
+      function drag(event) {
+        const deltaX = event.clientX - initialX;
+        const deltaY = event.clientY - initialY;
+
+        // Update sticky note position based on mouse movement
+        stickyNote.style.top = `${stickyNote.offsetTop + deltaY}px`;
+        stickyNote.style.left = `${stickyNote.offsetLeft + deltaX}px`;
+
+        // Update initial position for the next drag movement
+        initialX = event.clientX;
+        initialY = event.clientY;
+      }
+
+      // Optional: Stop dragging on mouseup (not included here for brevity)
+      // document.addEventListener("mouseup", () => {
+      //   stickyNote.removeEventListener("mousemove", drag);
+      // });
+    </script>
+  </body>
+</html>

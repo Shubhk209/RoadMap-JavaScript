@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array Prototype Property Example</title>
+    <style>
+      .output {
+        margin: 20px 0;
+      }
+      .result {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Array Prototype Property Example</h1>
+
+    <div id="output"></div>
+
+    <script>
+      // Adding a custom method to Array.prototype
+      Array.prototype.getUnique = function () {
+        // Create a new array with unique elements
+        return [...new Set(this)];
+      };
+
+      // Function to display results on the web page
+      function displayResults() {
+        // Example arrays
+        const numbers = [1, 2, 2, 3, 4, 4, 5];
+        const words = ["apple", "banana", "apple", "orange", "banana"];
+
+        // Getting unique elements using the custom method
+        const uniqueNumbers = numbers.getUnique();
+        const uniqueWords = words.getUnique();
+
+        // Prepare the output HTML
+        const outputHtml = `
+                <div class="output">
+                    <p class="result">Original numbers array: [${numbers}]</p>
+                    <p class="result">Unique numbers array: [${uniqueNumbers}]</p>
+                </div>
+                <div class="output">
+                    <p class="result">Original words array: [${words}]</p>
+                    <p class="result">Unique words array: [${uniqueWords}]</p>
+                </div>
+            `;
+
+        // Display the output on the web page
+        document.getElementById("output").innerHTML = outputHtml;
+      }
+
+      // Call the function to display results
+      displayResults();
+    </script>
+  </body>
+</html>
